@@ -163,11 +163,13 @@ body {
    ============================================================ */
 textarea {
   width: 100%;
-  min-height: 280px;
+  height: 280px;        /* min-height → height に変更（resizeで可変） */
+  min-height: 120px;
   background: transparent;
   border: none;
   outline: none;
   resize: vertical;
+  overflow-y: auto;
   padding: var(--padding-panel);
   font-family: var(--font-mono);
   font-size: 0.88rem;
@@ -186,7 +188,10 @@ textarea::placeholder {
    OUTPUT AREA
    ============================================================ */
 .output-area {
-  min-height: 280px;
+  /* textareaと高さを揃え、はみ出た分はスクロール */
+  height: 280px;
+  min-height: 120px;
+  overflow-y: auto;
   padding: var(--padding-panel);
   font-size: 0.88rem;
   line-height: 1.8;

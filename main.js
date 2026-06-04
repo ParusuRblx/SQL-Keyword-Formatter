@@ -1,3 +1,7 @@
+/* ============================================================
+   SQL Keyword Formatter — main.js
+   ============================================================ */
+
 // ============================================================
 // SQLキーワード一覧
 // ============================================================
@@ -171,6 +175,12 @@ function copyOutput() {
 // イベントリスナー
 // ============================================================
 inputArea.addEventListener("input", update);
+
+// textareaをresizeしたらoutputAreaの高さも連動させる
+const resizeObserver = new ResizeObserver(() => {
+  outputArea.style.height = inputArea.offsetHeight + "px";
+});
+resizeObserver.observe(inputArea);
 
 // ボタンはHTML側のonclick属性から呼び出すため、グローバルに公開
 window.clearAll    = clearAll;
