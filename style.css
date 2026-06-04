@@ -1,0 +1,320 @@
+/* ============================================================
+   THEME
+   ============================================================ */
+:root {
+  /* --- 背景 --- */
+  --color-bg:           #161616;   /* ページ全体の背景 */
+  --color-surface:      #1f1f1f;   /* パネルの背景 */
+  --color-surface-2:    #292929;   /* パネルヘッダーの背景 */
+
+  /* --- ボーダー --- */
+  --color-border:       #3b3b3b;   /* パネル・区切り線の色 */
+
+  /* --- テキスト --- */
+  --color-text:         #eee;   /* 本文テキスト */
+  --color-text-white:   #fff;   /* 見出しテキスト */
+  --color-muted:        #ccc;   /* 薄いテキスト・プレースホルダー */
+
+  /* --- アクセント --- */
+  --color-accent:       #507df8;   /* メインアクセント（ボタン・ドット・数値） */
+
+  /* --- SQLキーワードのハイライト --- */
+  --color-keyword:      #ff6b6b;   /* キーワード文字色 */
+  --color-keyword-bg:   rgba(255, 107, 107, 0.12); /* バッジ背景 */
+  --color-keyword-border: rgba(255, 107, 107, 0.25); /* バッジ枠線 */
+
+  /* --- ボタン --- */
+  --color-btn-primary-bg:   var(--color-accent); /* プライマリボタン背景 */
+  --color-btn-primary-text: #0a0c10;             /* プライマリボタン文字 */
+  --color-btn-secondary-bg: var(--color-surface-2); /* セカンダリボタン背景 */
+  --color-btn-secondary-text: var(--color-text);    /* セカンダリボタン文字 */
+
+  /* --- トースト通知 --- */
+  --color-toast-bg:   var(--color-accent);
+  --color-toast-text: #0a0c10;
+
+  /* --- カーソル --- */
+  --color-caret: var(--color-accent);
+
+  /* ============================================================
+     LAYOUT & TYPOGRAPHY — 色以外の設定
+     ============================================================ */
+  --font-mono:    'JetBrains Mono', monospace;
+  --font-display: 'Syne', sans-serif;
+
+  --radius-panel:  12px;
+  --radius-btn:     8px;
+  --radius-badge:  20px;
+  --radius-stats:   8px;
+
+  --gap-container: 20px;
+  --padding-panel: 20px;
+}
+
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-mono);
+  background: var(--color-bg);
+  color: var(--color-text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px 16px;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
+}
+
+.header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-white);
+  letter-spacing: -0.02em;
+}
+
+.header h1 span {
+  color: var(--color-accent);
+}
+
+.header p {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 6px;
+  letter-spacing: 0.05em;
+}
+
+
+/* ============================================================
+   GRID LAYOUT
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: 860px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gap-container);
+}
+
+@media (max-width: 640px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ============================================================
+   PANEL
+   ============================================================ */
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel);
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface-2);
+}
+
+.panel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.panel-dot--muted  { background: var(--color-muted); }
+.panel-dot--accent { background: var(--color-accent); }
+
+.panel-label {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  flex: 1;
+}
+
+
+/* ============================================================
+   INPUT TEXTAREA
+   ============================================================ */
+textarea {
+  width: 100%;
+  min-height: 280px;
+  background: transparent;
+  border: none;
+  outline: none;
+  resize: vertical;
+  padding: var(--padding-panel);
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  color: var(--color-text);
+  line-height: 1.8;
+  caret-color: var(--color-caret);
+}
+
+textarea::placeholder {
+  color: var(--color-muted);
+  opacity: 0.6;
+}
+
+
+/* ============================================================
+   OUTPUT AREA
+   ============================================================ */
+.output-area {
+  min-height: 280px;
+  padding: var(--padding-panel);
+  font-size: 0.88rem;
+  line-height: 1.8;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* SQLキーワードのハイライトスタイル */
+.kw {
+  color: var(--color-keyword);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   BADGE（キーワード数）
+   ============================================================ */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.68rem;
+  padding: 3px 8px;
+  border-radius: var(--radius-badge);
+  background: var(--color-keyword-bg);
+  color: var(--color-keyword);
+  border: 1px solid var(--color-keyword-border);
+}
+
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+.stats {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 12px 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-stats);
+  font-size: 0.72rem;
+  color: var(--color-muted);
+}
+
+.stat {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.stat-val {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   ACTIONS（ボタン群）
+   ============================================================ */
+.actions {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: -4px;
+}
+
+button {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-btn);
+  padding: 10px 24px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--color-btn-primary-bg);
+  color: var(--color-btn-primary-text);
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: var(--color-btn-secondary-bg);
+  color: var(--color-btn-secondary-text);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+
+/* ============================================================
+   TOAST NOTIFICATION
+   ============================================================ */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--color-toast-bg);
+  color: var(--color-toast-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 10px 18px;
+  border-radius: var(--radius-btn);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SQL Keyword Formatter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="header">
+    <h1>SQL <span>Keyword</span> Formatter</h1>
+    <p>SQLキーワードを自動で大文字に変換</p>
+  </div>
+
+  <div class="container">
+
+    <!-- 入力パネル -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-dot panel-dot--muted"></div>
+        <span class="panel-label">Input</span>
+      </div>
+      <textarea
+        id="inputArea"
+        placeholder="select * from users where id = 1 and name = 'Alice' order by created_at desc;"
+        spellcheck="false"
+      ></textarea>
+    </div>
+
+    <!-- 出力パネル -->
+    <div class="panel">
+      <div class="panel-header">
+        <div class="panel-dot panel-dot--accent"></div>
+        <span class="panel-label">Output</span>
+        <span class="badge" id="kwCount">— keywords</span>
+      </div>
+      <div class="output-area" id="outputArea"></div>
+    </div>
+
+    <!-- 統計バー -->
+    <div class="stats">
+      <div class="stat">キーワード数: <span class="stat-val" id="statKw">0</span></div>
+      <div class="stat">文字数: <span class="stat-val" id="statChar">0</span></div>
+      <div class="stat">行数: <span class="stat-val" id="statLine">0</span></div>
+    </div>
+
+    <!-- ボタン -->
+    <div class="actions">
+      <button class="btn-secondary" onclick="clearAll()">クリア</button>
+      <button class="btn-secondary" onclick="loadSample()">サンプルSQL</button>
+      <button class="btn-primary"   onclick="copyOutput()">出力をコピー</button>
+    </div>
+
+  </div>
+
+  <!-- トースト通知 -->
+  <div class="toast" id="toast">コピーしました！</div>
+
+  <script src="main.js"></script>
+</body>
+</html>
